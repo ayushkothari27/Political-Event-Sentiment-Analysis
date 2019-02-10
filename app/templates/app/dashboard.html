@@ -11,7 +11,8 @@
   <title>
     Dashboard
   </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
@@ -53,7 +54,7 @@
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="{% url 'app:map' %}">
               <i class="tim-icons icon-pin"></i>
               <p>Maps</p>
             </a>
@@ -67,6 +68,7 @@
         </ul>
       </div>
     </div>
+
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
@@ -163,7 +165,8 @@
           </div>
         </div>
       </nav>
-      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -178,9 +181,15 @@
         </div>
       </div>
       <!-- End Navbar -->
+
+
       <div class="content">
         <div class="row">
+
           <div class="col-12">
+            <img src="{% static 'assets/img/wordgram.png'%}" width="100%" height="500px" style="border-radius: 1%">
+            <br>
+            <br>
             <div class="card card-chart">
               <div class="card-header ">
                 <div class="row">
@@ -414,7 +423,7 @@
               </div>
             </div>
           </div> -->
-          <!-- <div class="col-lg-6 col-md-12">
+        <!-- <div class="col-lg-6 col-md-12">
             <div class="card ">
               <div class="card-header">
                 <h4 class="card-title"> Simple Table</h4>
@@ -541,9 +550,9 @@
               </div>
             </div>
           </div> -->
-        </div>
       </div>
-      <!-- <footer class="footer">
+    </div>
+    <!-- <footer class="footer">
         <div class="container-fluid">
           <nav>
             <ul>
@@ -572,32 +581,39 @@
             <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
           </div>
       </footer> -->
-      </div>
+  </div>
+  </div>
+
+  <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+      <a href="#" onclick="">
+        <i class="fa fa-cog fa-2x"> </i>
+      </a>
     </div>
-    <div class="fixed-plugin">
-      <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown">
-          <i class="fa fa-cog fa-2x"> </i>
-        </a>
-        <ul class="dropdown-menu">
-          <li class="header-title"> Sidebar Background</li>
-          <li class="adjustments-line">
-            <a href="javascript:void(0)" class="switch-trigger background-color">
-              <div class="badge-colors text-center">
-                <span class="badge filter badge-primary active" data-color="primary"></span>
-                <span class="badge filter badge-blue" data-color="blue"></span>
-                <span class="badge filter badge-green" data-color="green"></span>
-              </div>
-              <div class="clearfix"></div>
-            </a>
-          </li>
-          <li class="adjustments-line text-center color-change">
-            <span class="color-label">LIGHT MODE</span>
-            <span class="badge light-badge mr-2"></span>
-            <span class="badge dark-badge ml-2"></span>
-            <span class="color-label">DARK MODE</span>
-          </li>
-          <li class="button-container">
+    <br >
+    <div class="dropdown show-dropdown">
+      <a href="#" data-toggle="dropdown">
+        <i class="fa fa-cog fa-2x"> </i>
+      </a>
+      <ul class="dropdown-menu">
+        <li class="header-title">Settings</li>
+        <li class="adjustments-line">
+          <a href="javascript:void(0)" class="switch-trigger background-color">
+            <div class="badge-colors text-center">
+              <span class="badge filter badge-primary active" data-color="primary"></span>
+              <span class="badge filter badge-blue" data-color="blue"></span>
+              <span class="badge filter badge-green" data-color="green"></span>
+            </div>
+            <div class="clearfix"></div>
+          </a>
+        </li>
+        <li class="adjustments-line text-center color-change">
+          <span class="color-label">LIGHT MODE</span>
+          <span class="badge light-badge mr-2"></span>
+          <span class="badge dark-badge ml-2"></span>
+          <span class="color-label">DARK MODE</span>
+        </li>
+        <!-- <li class="button-container">
             <a href="https://www.creative-tim.com/product/black-dashboard" target="_blank" class="btn btn-primary btn-block btn-round">Download Now</a>
             <a href="https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block btn-round">
               Documentation
@@ -610,143 +626,143 @@
             <br>
             <br>
             <a class="github-button" href="https://github.com/creativetimofficial/black-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-          </li>
-        </ul>
-      </div>
+          </li> -->
+      </ul>
     </div>
-    <!--   Core JS Files   -->
-    <script src="{% static 'assets/js/core/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
-    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
-    <script src="{% static 'assets/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
-    <!--  Google Maps Plugin    -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-    <!-- Chart JS -->
-    <script src="{% static 'assets/js/plugins/chartjs.min.js' %}"></script>
-    <!--  Notifications Plugin    -->
-    <script src="{% static 'assets/js/plugins/bootstrap-notify.js' %}"></script>
-    <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{% static 'assets/js/black-dashboard.min.js' %}" type="text/javascript"></script>
-    <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-    <script src="{% static 'assets/demo/demo.js' %}"></script>
-    <script>
-      $(document).ready(function() {
-        $().ready(function() {
-          $sidebar = $('.sidebar');
-          $navbar = $('.navbar');
+  </div>
+  <!--   Core JS Files   -->
+  <script src="{% static 'assets/js/core/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+  <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- Chart JS -->
+  <script src="{% static 'assets/js/plugins/chartjs.min.js' %}"></script>
+  <!--  Notifications Plugin    -->
+  <script src="{% static 'assets/js/plugins/bootstrap-notify.js' %}"></script>
+  <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="{% static 'assets/js/black-dashboard.min.js' %}" type="text/javascript"></script>
+  <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+  <script src="{% static 'assets/demo/demo.js' %}"></script>
+  <script>
+    $(document).ready(function () {
+      $().ready(function () {
+        $sidebar = $('.sidebar');
+        $navbar = $('.navbar');
 
-          $full_page = $('.full-page');
+        $full_page = $('.full-page');
 
-          $sidebar_responsive = $('body > .navbar-collapse');
-          sidebar_mini_active = true;
-          white_color = false;
+        $sidebar_responsive = $('body > .navbar-collapse');
+        sidebar_mini_active = true;
+        white_color = false;
 
-          window_width = $(window).width();
+        window_width = $(window).width();
 
-          fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
 
 
 
-          $('.fixed-plugin a').click(function(event) {
-            // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
-            if ($(this).hasClass('switch-trigger')) {
-              if (event.stopPropagation) {
-                event.stopPropagation();
-              } else if (window.event) {
-                window.event.cancelBubble = true;
-              }
+        $('.fixed-plugin a').click(function (event) {
+          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+          if ($(this).hasClass('switch-trigger')) {
+            if (event.stopPropagation) {
+              event.stopPropagation();
+            } else if (window.event) {
+              window.event.cancelBubble = true;
             }
-          });
+          }
+        });
 
-          $('.fixed-plugin .background-color span').click(function() {
-            $(this).siblings().removeClass('active');
-            $(this).addClass('active');
+        $('.fixed-plugin .background-color span').click(function () {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
 
-            var new_color = $(this).data('color');
+          var new_color = $(this).data('color');
 
-            if ($sidebar.length != 0) {
-              $sidebar.attr('data-color', new_color);
-            }
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-color', new_color);
+          }
 
-            if ($navbar.length != 0) {
-              $navbar.attr('data-color', new_color);
-            }
+          if ($navbar.length != 0) {
+            $navbar.attr('data-color', new_color);
+          }
 
-            if ($full_page.length != 0) {
-              $full_page.attr('filter-color', new_color);
-            }
+          if ($full_page.length != 0) {
+            $full_page.attr('filter-color', new_color);
+          }
 
-            if ($sidebar_responsive.length != 0) {
-              $sidebar_responsive.attr('data-color', new_color);
-            }
-          });
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.attr('data-color', new_color);
+          }
+        });
 
-          $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function() {
-            var $btn = $(this);
+        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+          var $btn = $(this);
 
-            if (sidebar_mini_active == true) {
-              $('body').removeClass('sidebar-mini');
-              sidebar_mini_active = false;
-              blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
-            } else {
-              $('body').addClass('sidebar-mini');
-              sidebar_mini_active = true;
-              blackDashboard.showSidebarMessage('Sidebar mini activated...');
-            }
+          if (sidebar_mini_active == true) {
+            $('body').removeClass('sidebar-mini');
+            sidebar_mini_active = false;
+            blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+          } else {
+            $('body').addClass('sidebar-mini');
+            sidebar_mini_active = true;
+            blackDashboard.showSidebarMessage('Sidebar mini activated...');
+          }
 
-            // we simulate the window Resize so the charts will get updated in realtime.
-            var simulateWindowResize = setInterval(function() {
-              window.dispatchEvent(new Event('resize'));
-            }, 180);
+          // we simulate the window Resize so the charts will get updated in realtime.
+          var simulateWindowResize = setInterval(function () {
+            window.dispatchEvent(new Event('resize'));
+          }, 180);
 
-            // we stop the simulation of Window Resize after the animations are completed
-            setTimeout(function() {
-              clearInterval(simulateWindowResize);
-            }, 1000);
-          });
+          // we stop the simulation of Window Resize after the animations are completed
+          setTimeout(function () {
+            clearInterval(simulateWindowResize);
+          }, 1000);
+        });
 
-          $('.switch-change-color input').on("switchChange.bootstrapSwitch", function() {
-            var $btn = $(this);
+        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+          var $btn = $(this);
 
-            if (white_color == true) {
+          if (white_color == true) {
 
-              $('body').addClass('change-background');
-              setTimeout(function() {
-                $('body').removeClass('change-background');
-                $('body').removeClass('white-content');
-              }, 900);
-              white_color = false;
-            } else {
+            $('body').addClass('change-background');
+            setTimeout(function () {
+              $('body').removeClass('change-background');
+              $('body').removeClass('white-content');
+            }, 900);
+            white_color = false;
+          } else {
 
-              $('body').addClass('change-background');
-              setTimeout(function() {
-                $('body').removeClass('change-background');
-                $('body').addClass('white-content');
-              }, 900);
+            $('body').addClass('change-background');
+            setTimeout(function () {
+              $('body').removeClass('change-background');
+              $('body').addClass('white-content');
+            }, 900);
 
-              white_color = true;
-            }
+            white_color = true;
+          }
 
 
-          });
+        });
 
-          $('.light-badge').click(function() {
-            $('body').addClass('white-content');
-          });
+        $('.light-badge').click(function () {
+          $('body').addClass('white-content');
+        });
 
-          $('.dark-badge').click(function() {
-            $('body').removeClass('white-content');
-          });
+        $('.dark-badge').click(function () {
+          $('body').removeClass('white-content');
         });
       });
-    </script>
-    <script>
-      $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      // Javascript method's body can be found in assets/js/demos.js
+      demo.initDashboardPageCharts();
 
-      });
-    </script>
+    });
+  </script>
 </body>
 
 </html>

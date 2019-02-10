@@ -10,10 +10,14 @@ import json
 import requests
 import nltk
 import tweepy
+import folium
+import geocoder
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 nltk.download('vader_lexicon')
 sid = SentimentIntensityAnalyzer()
-from .models import *
+
+# Create your views here.
+
 
 ckey="7h38tcEM8IO8id2htVXO9NDoW"
 csecret="A9zfCDyM8mx7P2LBaC9rkCIgoOV3P71ZCajKbn2l0tt4EnkObk"
@@ -23,7 +27,7 @@ asecret="45c3EKZBxdI86ssyoR3gypx0ffIZGFyjlgcsznft2SToD"
 def calculate_quora_score():
     answers_assam = get_data('assamciti')
     scores_assam = getscore(answers_assam)
-    event_assam = Quora(event="Citizenship Bill And Assam",score=str(scores_assam))
+    event_assam = Quora(event="Citizenship Bill",score=str(scores_assam))
     event_assam.save()
     answers_rafale = get_data('rafale_quora')
     scores_rafale = getscore(answers_rafale)
@@ -31,7 +35,7 @@ def calculate_quora_score():
     event_rafale.save()
     answers_ram = get_data('ram_mandir')
     scores_ram = getscore(answers_ram)
-    event_ram = Quora(event='Ram Mandir Controversy',score=str(scores_ram))
+    event_ram = Quora(event='Ram Mandir',score=str(scores_ram))
     event_ram.save()
 
 def getscore(sentences):
@@ -91,7 +95,7 @@ class Article():
         return self.url
 
 def get_quora_data(request):
-    #calculate_quora_score()
+    calculate_quora_score()
     query_set = Quora.objects.all()
     return render(request,'app/quorascore.html',{'events':query_set})
 
@@ -249,21 +253,24 @@ def gettwitterresults(term, items=400):
 
 
 def tweet_view(request):
-    gettwitterscore('Citizenship Bill')
+    gettwitterscore('Narendra Modi')
 
     tweets = Twitter.objects.all()
     return render(request,'app/quorascore.html',{'tweets':tweets})
 
 def events(request, id):
-    event = Event.object.get(id=id)
+    event = Event.objects.get(id=id)
     event_name = event.event_name
-    tweets = Twitter.objects.all(event=event_name)
-    quora = Quora.objects.all(event=event_name)
-    quora_score = quora.score
+    tweets = Twitter.objects.filter(event=event_name)
+    quora = Quora.objects.get(event=event_name)
+    quora_score = eval(quora.score)[0]
     event_score = event.score
+    quo_eve = [quora_score, event_score]
+    print(quo_eve)
     tweet_pos = event.pos_score
     tweet_neg = event.neg_score
     tweet_neu = event.neu_score
+    score_list = [tweet_pos, tweet_neg, tweet_neu]
     posloc = []
     negloc = []
     score = []
@@ -275,13 +282,62 @@ def events(request, id):
         else:
             negloc.append(tweet.location)
     context = {
-        'quora_score': quora_score,
         'event_score': event_score,
-        'tweet_pos': tweet_pos,
-        'tweet_neg': tweet_neg,
-        'tweet_neu': tweet_neu,
         'posloc': posloc,
         'negloc': negloc,
-        'score': score
+        'score': score,
+        'score_list':score_list,
+        'quo_eve':quo_eve
     }
     return render(request, 'app/events.html' ,context)
+
+def map(request):
+    # m = folium.Map(location=[21.146633,  79.088860], zoom_start=5)
+    # queryset = Twitter.objects.all().filter(event = 'Rahul Gandhi')
+    # locs = []
+    # for query in queryset:
+    #     locs.append(query.location)
+    # print(len(locs))
+    # for index, loc in enumerate(locs):
+    #     if index>200:
+    #         break
+    #     try:
+    #         print(loc)
+    #         g = geocoder.location(loc)
+    #         folium.Marker(
+    #             location=[g.lat, g.lng],
+    #             popup='INC',
+    #             icon=folium.Icon(color='green', icon='monero')
+    #         ).add_to(m)
+    #     except Exception as e:
+    #         print(e)
+    # queryset2 = Twitter.objects.all().filter(event = 'Narendra Modi')
+    # locs2 = []
+    # for query in queryset2:
+    #     locs2.append(query.location)
+    # print(len(locs2))
+    # for index, loc in enumerate(locs2):
+    #     if index>200:
+    #         break
+    #     try:
+    #         print(loc)
+    #         g = geocoder.location(loc)
+    #         folium.Marker(
+    #             location=[g.lat, g.lng],
+    #             popup='BJP',
+    #             icon=folium.Icon(color='orange', icon='monero')
+    #         ).add_to(m)
+    #     except Exception as e:
+    #         print(e)
+
+    # m.save('app/templates/app/mapteset2.html')
+    # fil= open('app/templates/app/mapteset2.html',"r")
+    # contents = fil.read()
+    # fil.close()
+    # f = open('app/templates/app/mapteset.html',"w+")
+    # f.write('{% extends "app/map.html" %}')
+    # f.write('{% block mapteset %}')
+    # f.write(contents)
+    # f.write("{% endblock %}")
+    # f.close()
+    return render(request, 'app/mapteset.html', {})
