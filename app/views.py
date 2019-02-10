@@ -282,6 +282,7 @@ def events(request, id):
         else:
             negloc.append(tweet.location)
     context = {
+        'event_name': event_name,
         'event_score': event_score,
         'posloc': posloc,
         'negloc': negloc,
@@ -289,7 +290,13 @@ def events(request, id):
         'score_list':score_list,
         'quo_eve':quo_eve
     }
-    return render(request, 'app/events.html' ,context)
+    if event_name == "Rafale Deal":
+        txt = 'app/maprafale.html'
+    elif event_name == "Ram Mandir":
+        txt = 'app/mapram.html'
+    else:
+        txt = 'app/mapciti.html'
+    return render(request, txt ,context)
 
 def map(request):
     # m = folium.Map(location=[21.146633,  79.088860], zoom_start=5)
