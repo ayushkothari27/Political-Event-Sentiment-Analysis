@@ -41,7 +41,7 @@
         </div>
         <ul class="nav">
           <li class="active ">
-            <a href="./dashboard.html">
+            <a href="{% url 'app:dashboard' %}">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Dashboard</p>
             </a>
@@ -234,14 +234,15 @@
             </div>
           </div>
         </div>
+        <hr style="color: white; border-top: 1px solid #777"/>
         <div class="row">
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header ">
-                <p class="card-category"><h3>Assam Citizen Bill</h3></p>
+                <p class="card-category"><a href="{% url 'app:events' 1 %}"><h3>Citizenship Bill</h3></a></p>
               </div>
               <div class="card-body ">
-                <div style="color:white; padding:15px; text-align: center; height:430px; overflow-y:hidden">
+                <div style="color:#777; padding:15px; text-align: center; height:430px; overflow-y:hidden">
                   <img src="https://www.timesheadline.com/wp-content/uploads/2019/01/citizenship.jpg" width="349px" height="183px">
                   <br/>
                   <br/>
@@ -257,10 +258,10 @@
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header ">
-                <h2 class="card-category"><h3>Rafale deal</h3></h2>
+                <h2 class="card-category"><a href="{% url 'app:events' 2 %}"><h3>Rafale deal</h3></a></h2>
               </div>
               <div class="card-body ">
-                <div style="color:white; padding:15px; text-align: center; height:430px; overflow-y:hidden">
+                <div style="color:#777; padding:15px; text-align: center; height:430px; overflow-y:hidden">
                   <img src="https://img.etimg.com/thumb/msid-65495726,width-300,imgsize-197404,resizemode-4/1.jpg" width="349px" height="183px">
                   <br/><br/>
                   The Rafale deal controversy is a political controversy in India related to the purchase of 36 multirole fighter aircraft for a price estimated at €7.8 billion by the Defence Ministry of India from France's Dassault Aviation. The origin of the deal lies in the Indian MRCA competition, a multi-billion dollar contract to supply 126 multi-role combat aircraft to the Indian Air Force (IAF). To find what people are thinking click here ....
@@ -271,10 +272,10 @@
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header ">
-                <h2 class="card-category"><h3>Ram Mandir</h3></h2>
+                <h2 class="card-category"><a href="{% url 'app:events' 3 %}"><h3>Ram Mandir</h3></a></h2>
               </div>
               <div class="card-body ">
-                <div style="color:white; padding:15px; text-align: center; height:430px; overflow-y:hidden">
+                <div style="color:#777; padding:15px; text-align: center; height:430px; overflow-y:hidden">
                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR67xeGe0NmNNwzseiaksfs1OE_GrDAUtus7Q4nV2eHSJvd3fhp" width="349px" height="183px">
                   <br/><br/>
                   The Ayodhya dispute is a political, historical and socio-religious debate in India, centred on a plot of land in the city of Ayodhya, located in Ayodhya District, Uttar Pradesh. The main issues revolve around access to a site traditionally regarded among Hindus to be the birthplace of the Hindu deity Rama, the history and location of the Babri Masjid at the site, and whether a previous Hindu temple was demolished or modified to create the mosque.

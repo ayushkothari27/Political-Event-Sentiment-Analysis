@@ -248,12 +248,39 @@ def gettwitterresults(term, items=400):
 
 
 def tweet_view(request):
-    gettwitterscore('Rahul Gandhi')
+    gettwitterscore('Citizenship Bill')
 
     tweets = Twitter.objects.all()
     return render(request,'app/quorascore.html',{'tweets':tweets})
-    
+
 def events(request, id):
     event = Event.object.get(id=id)
     event_name = event.event_name
     tweets = Twitter.objects.all(event=event_name)
+    quora = Quora.objects.all(event=event_name)
+    quora_score = quora.score
+    event_score = event.score
+    tweet_pos = event.pos_score
+    tweet_neg = event.neg_score
+    tweet_neu = event.neu_score
+    posloc = []
+    negloc = []
+    score = []
+    for tweet in tweets:
+        sc = {'x': tweet.score_pos, 'y': tweet.score_neg}
+        score.append(sc)
+        if sc['x'] > sc['y']:
+            posloc.append(tweet.location)
+        else:
+            negloc.append(tweet.location)
+    context = {
+        'quora_score': quora_score,
+        'event_score': event_score,
+        'tweet_pos': tweet_pos,
+        'tweet_neg': tweet_neg,
+        'tweet_neu': tweet_neu,
+        'posloc': posloc,
+        'negloc': negloc,
+        'score': score
+    }
+    return render(request, 'app/events.html' ,context)
