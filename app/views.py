@@ -23,7 +23,7 @@ asecret="45c3EKZBxdI86ssyoR3gypx0ffIZGFyjlgcsznft2SToD"
 def calculate_quora_score():
     answers_assam = get_data('assamciti')
     scores_assam = getscore(answers_assam)
-    event_assam = Quora(event="Citizenship Bill And Assam",score=str(scores_assam))
+    event_assam = Quora(event="Citizenship Bill",score=str(scores_assam))
     event_assam.save()
     answers_rafale = get_data('rafale_quora')
     scores_rafale = getscore(answers_rafale)
@@ -31,7 +31,7 @@ def calculate_quora_score():
     event_rafale.save()
     answers_ram = get_data('ram_mandir')
     scores_ram = getscore(answers_ram)
-    event_ram = Quora(event='Ram Mandir Controversy',score=str(scores_ram))
+    event_ram = Quora(event='Ram Mandir',score=str(scores_ram))
     event_ram.save()
 
 def getscore(sentences):
@@ -91,7 +91,7 @@ class Article():
         return self.url
 
 def get_quora_data(request):
-    #calculate_quora_score()
+    calculate_quora_score()
     query_set = Quora.objects.all()
     return render(request,'app/quorascore.html',{'events':query_set})
 
@@ -248,21 +248,24 @@ def gettwitterresults(term, items=400):
 
 
 def tweet_view(request):
-    gettwitterscore('Citizenship Bill')
+    gettwitterscore('Ram Mandir')
 
     tweets = Twitter.objects.all()
     return render(request,'app/quorascore.html',{'tweets':tweets})
 
 def events(request, id):
-    event = Event.object.get(id=id)
+    event = Event.objects.get(id=id)
     event_name = event.event_name
-    tweets = Twitter.objects.all(event=event_name)
-    quora = Quora.objects.all(event=event_name)
-    quora_score = quora.score
+    tweets = Twitter.objects.filter(event=event_name)
+    quora = Quora.objects.get(event=event_name)
+    quora_score = eval(quora.score)[0]
     event_score = event.score
+    quo_eve = [quora_score, event_score]
+    print(quo_eve)
     tweet_pos = event.pos_score
     tweet_neg = event.neg_score
     tweet_neu = event.neu_score
+    score_list = [tweet_pos, tweet_neg, tweet_neu]
     posloc = []
     negloc = []
     score = []
@@ -274,13 +277,11 @@ def events(request, id):
         else:
             negloc.append(tweet.location)
     context = {
-        'quora_score': quora_score,
         'event_score': event_score,
-        'tweet_pos': tweet_pos,
-        'tweet_neg': tweet_neg,
-        'tweet_neu': tweet_neu,
         'posloc': posloc,
         'negloc': negloc,
-        'score': score
+        'score': score,
+        'score_list':score_list,
+        'quo_eve':quo_eve
     }
     return render(request, 'app/events.html' ,context)

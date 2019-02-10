@@ -209,7 +209,7 @@
               <div class="card-header ">
                 <div class="row">
                   <div class="col-sm-6 text-left">
-                    <h2 class="card-category">Modi vs RaGa</h2>
+                    <h2 class="card-category">Scatter Plot</h2>
                   </div>
                   <!-- <div class="col-sm-6">
                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -226,52 +226,52 @@
                   </div> -->
                 </div>
               </div>
-              <div class="card-body">
+              <div class="card-body" style="height:500px">
                 <div class="chart-area">
-                  <!-- <canvas id="chartBig1"></canvas> -->
+                  <canvas id="chartBig1"></canvas>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-6">
             <div class="card card-chart">
               <div class="card-header ">
-                <h2 class="card-category">Assam Citizen Bill</h2>
+                <h2 class="card-category">Twitter sentiments</h2>
               </div>
               <div class="card-body ">
                 <div class="chart-area">
 
-                  <!-- <canvas id="chartLinePurple"></canvas> -->
+                  <canvas id="myChart"></canvas>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-6">
             <div class="card card-chart">
               <div class="card-header ">
-                <h2 class="card-category">Rafale deal</h2>
+                <h2 class="card-category">Social Media</h2>
               </div>
               <div class="card-body ">
                 <div class="chart-area">
-                  <!-- <canvas id="CountryChart"></canvas> -->
+                  <canvas id="myChart1"></canvas>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
+          <!-- <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header ">
-                <h2 class="card-category">Ram Mandir</h2>
+                <h2 class="card-category"></h2>
               </div>
               <div class="card-body ">
                 <div class="chart-area">
-                  <!-- <canvas id="chartLineGreen"></canvas> -->
+                  <canvas id="myChart2"></canvas>
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <!-- <div class="row">
           <div class="col-lg-6 col-md-12">
@@ -630,6 +630,7 @@
     <script src="{% static 'assets/js/core/jquery.min.js' %}"></script>
     <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
     <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+    <script src="{% static '/assets/chart.js/Chart.js' %}"></script>
     <script src="{% static 'assets/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
     <!--  Google Maps Plugin    -->
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
@@ -759,6 +760,89 @@
 
       });
     </script>
+
+
+
+    <script>
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ["Positive", "Negative", "Neutral"],
+        datasets: [{
+            label: '# of Votes',
+            data: {{score_list|safe}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+});
+
+var ctx1 = document.getElementById("chartBig1");
+var scatterChart = new Chart(ctx1, {
+    type: 'scatter',
+    data: {
+        datasets: [{
+            label: 'Scatter Dataset',
+            data: {{score|safe}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+            ],
+        }]
+    },
+    options: {
+        scales: {
+            xAxes: [{
+                type: 'linear',
+                position: 'bottom'
+            }]
+        }
+    }
+});
+
+
+var ctx2 = document.getElementById("myChart1");
+var myChart = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: ["Quora", "Twitter"],
+        datasets: [{
+            label: '# of Votes',
+            data: {{quo_eve|safe}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+});
+
+
+</script>
+
+    </script>
+
 </body>
 
 </html>
