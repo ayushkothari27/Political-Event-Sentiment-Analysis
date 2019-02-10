@@ -10,3 +10,6 @@ class Twitter(models.Model):
 class Quora(models.Model):
     event = models.CharField(max_length=200, blank=True, null=True)
     score = models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return self.event
