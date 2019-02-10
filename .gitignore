@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+**/migrations/*
+!__init__.py
+media/
+*env
+db.sqlite3
+.flake8
+.idea
+.env
+kj
