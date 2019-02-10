@@ -5,4 +5,5 @@ app_name = 'app'
 
 urlpatterns = [
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
+    url(r'^news/$', views.news, name='news'),
 ]
