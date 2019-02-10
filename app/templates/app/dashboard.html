@@ -33,15 +33,12 @@
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
-          <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-            CT
-          </a>
-          <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+          <a href="{% url 'app:dashboard' %}" class="simple-text logo-normal">
             Tweepy
           </a>
         </div>
         <ul class="nav">
-          <li class="active ">
+          <li class="active">
             <a href="{% url 'app:dashboard' %}">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Dashboard</p>
@@ -585,12 +582,6 @@
   </div>
 
   <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-      <a href="#" onclick="">
-        <i class="fa fa-cog fa-2x"> </i>
-      </a>
-    </div>
-    <br >
     <div class="dropdown show-dropdown">
       <a href="#" data-toggle="dropdown">
         <i class="fa fa-cog fa-2x"> </i>
