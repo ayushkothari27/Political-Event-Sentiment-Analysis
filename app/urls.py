@@ -5,5 +5,6 @@ app_name = 'app'
 
 urlpatterns = [
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
+    url(r'^bot/$', views.bot, name='bot'),
     url(r'^quora/$',views.get_quora_data,name='quora')
 ]
