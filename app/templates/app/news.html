@@ -40,55 +40,31 @@
           </a>
         </div>
         <ul class="nav">
-          <li>
-            <a href="{% url 'app:dashboard' %}">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="active ">
-            <a href="{% url 'app:news' %}">
-              <i class="tim-icons icon-atom"></i>
-              <p>News</p>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'app:map' %}">
-              <i class="tim-icons icon-pin"></i>
-              <p>Maps</p>
-            </a>
-          </li>
-          <li>
-            <a href="./notifications.html">
-              <i class="tim-icons icon-bell-55"></i>
-              <p>Notifications</p>
-            </a>
-          </li>
-          <li>
-            <a href="./user.html">
-              <i class="tim-icons icon-single-02"></i>
-              <p>User Profile</p>
-            </a>
-          </li>
-          <li>
-            <a href="./tables.html">
-              <i class="tim-icons icon-puzzle-10"></i>
-              <p>Table List</p>
-            </a>
-          </li>
-          <li>
-            <a href="./typography.html">
-              <i class="tim-icons icon-align-center"></i>
-              <p>Typography</p>
-            </a>
-          </li>
-          <li>
-            <a href="./rtl.html">
-              <i class="tim-icons icon-world"></i>
-              <p>RTL Support</p>
-            </a>
-          </li>
-        </ul>
+            <li>
+              <a href="{% url 'app:dashboard' %}">
+                <i class="tim-icons icon-chart-pie-36"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="active">
+              <a href="{% url 'app:news' %}">
+                <i class="tim-icons icon-atom"></i>
+                <p>News</p>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'app:map' %}">
+                <i class="tim-icons icon-pin"></i>
+                <p>Maps</p>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'app:bot' %}">
+                <i class="tim-icons icon-align-center"></i>
+                <p>Tweepy</p>
+              </a>
+            </li>
+          </ul>
       </div>
     </div>
     <div class="main-panel">
@@ -207,9 +183,10 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-body all-icons">
-                <div class="row">
 
-                      <div style="padding-top: 80px;">
+                <div class="row">
+                  <p style="color: pink; font-size: 40px; padding-left: 15px">News</p>
+                      <div>
                       	{% for article in articles  %}
 
                       		<div class="container">
