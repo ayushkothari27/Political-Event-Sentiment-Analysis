@@ -17,7 +17,7 @@ class Quora(models.Model):
     score = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
-       return self.event
+        return self.event
 
 
 class Event(models.Model):
@@ -28,4 +28,4 @@ class Event(models.Model):
     neg_score = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
-       return self.event_name
+        return self.event_name
