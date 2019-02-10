@@ -9,6 +9,9 @@ class Twitter(models.Model):
     score_neg = models.CharField(max_length=200, blank=True, null=True)
     location = models.CharField(max_length=200, blank=True, null=True)
 
+    def __str__(self):
+        return self.event
+
 class Quora(models.Model):
     event = models.CharField(max_length=200, blank=True, null=True)
     score = models.CharField(max_length=200, blank=True, null=True)

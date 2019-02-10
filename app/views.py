@@ -1,4 +1,4 @@
-from .models import Quora,Twitter
+from .models import *
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 import requests
@@ -9,10 +9,16 @@ import time
 import json
 import requests
 import nltk
+import tweepy
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 nltk.download('vader_lexicon')
 sid = SentimentIntensityAnalyzer()
 from .models import *
+
+ckey="7h38tcEM8IO8id2htVXO9NDoW"
+csecret="A9zfCDyM8mx7P2LBaC9rkCIgoOV3P71ZCajKbn2l0tt4EnkObk"
+atoken="2611228746-JSr7EbtntCKlcAjZl5PkvVFxq8sYyzhamjvYYXg"
+asecret="45c3EKZBxdI86ssyoR3gypx0ffIZGFyjlgcsznft2SToD"
 
 def calculate_quora_score():
     answers_assam = get_data('assamciti')
@@ -91,10 +97,6 @@ def get_quora_data(request):
 
 
 #consumer key, consumer secret, access token, access secret.
-ckey="7h38tcEM8IO8id2htVXO9NDoW"
-csecret="A9zfCDyM8mx7P2LBaC9rkCIgoOV3P71ZCajKbn2l0tt4EnkObk"
-atoken="2611228746-JSr7EbtntCKlcAjZl5PkvVFxq8sYyzhamjvYYXg"
-asecret="45c3EKZBxdI86ssyoR3gypx0ffIZGFyjlgcsznft2SToD"
 
 
 def bot(request):
@@ -179,7 +181,106 @@ class listener(StreamListener):
         if status_code == 420:
             return False
 
+def gettwitterscore(term, count = 400):
+   data = gettwitterresults(term, items=count)
+   l = len(data)
+   print(l)
+   posloc = []
+   negloc = []
+   sentences = []
+   c = neg = neu = pos = 0
+   for tweet in data:
+       json = tweet._json
+       text = tweet.full_text
+       sentences.append(text)
+       ss = sid.polarity_scores(text)
+       fc = json['favorite_count']
+       rt = json['retweet_count']
+
+       event = term
+       location = json['user']['location']
+       score_pos = ss['pos']
+       score_neg = ss['neg']
+       tweet_id = json['id']
+       tweet = Twitter(tweet_id=tweet_id,event=event,location=location,score_pos=score_pos,score_neg=score_neg)
+       tweet.save()
+
+       sums = int((fc + rt)/500)
+       l += sums
+       if ss['compound'] >= 0:
+           posloc.append(json['user']['location'])
+       else:
+           negloc.append(json['user']['location'])
+       c += ss['compound'] * sums
+       neg += ss['neg'] * sums
+       neu += ss['neu'] * sums
+       pos += ss['pos'] * sums
+
+   print(l)
+   event_name = term
+   score = c/l
+   pos_score = pos/l
+   neg_score = neg/l
+   neu_score = neu/l
+   event = Event(event_name=event_name,score=score,pos_score=pos_score,neg_score=neg_score,neu_score=neu_score)
+   event.save()
+   #return c/l, neg/l, neu/l, pos/l, sentences, posloc, negloc
+
+
+
+def gettwitterresults(term, items=400):
+
+   auth = tweepy.OAuthHandler("7h38tcEM8IO8id2htVXO9NDoW", "A9zfCDyM8mx7P2LBaC9rkCIgoOV3P71ZCajKbn2l0tt4EnkObk")
+   auth.set_access_token("2611228746-JSr7EbtntCKlcAjZl5PkvVFxq8sYyzhamjvYYXg", "45c3EKZBxdI86ssyoR3gypx0ffIZGFyjlgcsznft2SToD")
+
+   api = tweepy.API(auth)
+#     query = term + " -@ -filter:retweets -filter:media -filter:links -filter:replies"
+   query = term
+   searched_tweets = [status for status in tweepy.Cursor(api.search, q=query , lang='en', show_users = False,
+                                                         tweet_mode='extended').items(items)]
+
+   return searched_tweets
+
+#     for tweet in searched_tweets:
+#         pprint(tweet._json)
+#         print(tweet.full_text)
+#         print("-"*100)
+
+
+def tweet_view(request):
+    gettwitterscore('Citizenship Bill')
+
+    tweets = Twitter.objects.all()
+    return render(request,'app/quorascore.html',{'tweets':tweets})
+
 def events(request, id):
     event = Event.object.get(id=id)
     event_name = event.event_name
     tweets = Twitter.objects.all(event=event_name)
+    quora = Quora.objects.all(event=event_name)
+    quora_score = quora.score
+    event_score = event.score
+    tweet_pos = event.pos_score
+    tweet_neg = event.neg_score
+    tweet_neu = event.neu_score
+    posloc = []
+    negloc = []
+    score = []
+    for tweet in tweets:
+        sc = {'x': tweet.score_pos, 'y': tweet.score_neg}
+        score.append(sc)
+        if sc['x'] > sc['y']:
+            posloc.append(tweet.location)
+        else:
+            negloc.append(tweet.location)
+    context = {
+        'quora_score': quora_score,
+        'event_score': event_score,
+        'tweet_pos': tweet_pos,
+        'tweet_neg': tweet_neg,
+        'tweet_neu': tweet_neu,
+        'posloc': posloc,
+        'negloc': negloc,
+        'score': score
+    }
+    return render(request, 'app/events.html' ,context)
