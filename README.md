@@ -22,7 +22,7 @@
 
 
 
-`This was built at a hackathon within 24 hours with minimal pre-preparation`
+`This was built at a hackathon within 7 hours with minimal pre-preparation`
 
 
 ## Contributors
