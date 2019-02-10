@@ -10,6 +10,7 @@ import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 nltk.download('vader_lexicon')
 sid = SentimentIntensityAnalyzer()
+from .models import *
 
 
 def dashboard(request):
@@ -106,3 +107,9 @@ class listener(StreamListener):
     def on_error(self, status_code):
         if status_code == 420:
             return False
+
+
+def events(request, id):
+    event = Event.object.get(id=id)
+    event_name = event.event_name
+    tweets = Twitter.objects.all(event=event_name)
