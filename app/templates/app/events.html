@@ -24,7 +24,7 @@
   <link href="{% static 'assets/demo/demo.css' %}" rel="stylesheet" />
 </head>
 
-<body style="height:100%">
+<body style="background-color: #343a40">
   <div class="wrapper ">
     <div class="sidebar">
       <!--
@@ -766,9 +766,9 @@ var myChart = new Chart(ctx, {
             label: '# of Votes',
             data: {{score_list|safe}},
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
             ],
             borderColor: [
                 'rgba(255,99,132,1)',
@@ -788,9 +788,9 @@ var scatterChart = new Chart(ctx1, {
             label: 'Scatter Dataset',
             data: {{score|safe}},
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
             ],
             borderColor: [
                 'rgba(255,99,132,1)',
@@ -819,8 +819,8 @@ var myChart = new Chart(ctx2, {
             label: '# of Votes',
             data: {{quo_eve|safe}},
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
             ],
             borderColor: [
                 'rgba(255,99,132,1)',

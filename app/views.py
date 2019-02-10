@@ -12,6 +12,7 @@ import nltk
 import tweepy
 import folium
 import geocoder
+import random
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 nltk.download('vader_lexicon')
 sid = SentimentIntensityAnalyzer()
@@ -19,10 +20,10 @@ sid = SentimentIntensityAnalyzer()
 # Create your views here.
 
 
-ckey="7h38tcEM8IO8id2htVXO9NDoW"
-csecret="A9zfCDyM8mx7P2LBaC9rkCIgoOV3P71ZCajKbn2l0tt4EnkObk"
-atoken="2611228746-JSr7EbtntCKlcAjZl5PkvVFxq8sYyzhamjvYYXg"
-asecret="45c3EKZBxdI86ssyoR3gypx0ffIZGFyjlgcsznft2SToD"
+ckey=""
+csecret=""
+atoken=""
+asecret=""
 
 def calculate_quora_score():
     answers_assam = get_data('assamciti')
@@ -79,6 +80,7 @@ def news(request):
     for article in articles_json:
         articles.append(Article(title = article['title'], description = article['description'],url = article['url'],image_url=article['urlToImage']))
         print(article)
+    random.shuffle(articles)
     context = {'articles':articles}
     print("-"*100)
 
@@ -235,8 +237,8 @@ def gettwitterscore(term, count = 400):
 
 def gettwitterresults(term, items=400):
 
-   auth = tweepy.OAuthHandler("7h38tcEM8IO8id2htVXO9NDoW", "A9zfCDyM8mx7P2LBaC9rkCIgoOV3P71ZCajKbn2l0tt4EnkObk")
-   auth.set_access_token("2611228746-JSr7EbtntCKlcAjZl5PkvVFxq8sYyzhamjvYYXg", "45c3EKZBxdI86ssyoR3gypx0ffIZGFyjlgcsznft2SToD")
+   auth = tweepy.OAuthHandler("", "")
+   auth.set_access_token("", "")
 
    api = tweepy.API(auth)
 #     query = term + " -@ -filter:retweets -filter:media -filter:links -filter:replies"
