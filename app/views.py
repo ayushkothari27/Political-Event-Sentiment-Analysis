@@ -203,6 +203,7 @@ def gettwitterscore(term, count = 400):
        score_neg = ss['neg']
        tweet_id = json['id']
        tweet = Twitter(tweet_id=tweet_id,event=event,location=location,score_pos=score_pos,score_neg=score_neg)
+       print(tweet)
        tweet.save()
 
        sums = int((fc + rt)/500)
