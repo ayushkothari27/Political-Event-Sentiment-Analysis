@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^twitter/$', views.tweet_view, name='twitter'),
     url(r'^events/(\d+)$', views.events, name='events'),
     url(r'^quora/$',views.get_quora_data,name='quora'),
+    url(r'^map/$', views.map, name='map'),
 ]
