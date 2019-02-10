@@ -5,9 +5,12 @@
     <title></title>
   </head>
   <body>
-    {% for event in events %}
-        <p>{{event.event}}</p>
-        <p>{{event.score}}</p>
+    {% for tweet in tweets %}
+        <p>{{tweet.event}}</p>
+        <p>{{tweet.tweet_id}}</p>
+        <p>{{tweet.score_neg}}</p>
+        <p>{{tweet.score_pos}}</p>
+        <p>{{tweet.location}}</p>
     {% endfor %}
 
   </body>
